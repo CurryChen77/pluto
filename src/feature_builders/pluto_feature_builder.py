@@ -426,7 +426,9 @@ class PlutoFeatureBuilder(AbstractFeatureBuilder):
         present_idx: int,
         tracked_objects_list: List[TrackedObjects],
     ):
+        # tracked_objects_list is a list of historical tracked objects
         present_tracked_objects = tracked_objects_list[present_idx]
+        # get
         present_agents = present_tracked_objects.get_tracked_objects_of_types(
             self.interested_objects_types
         )
@@ -568,7 +570,7 @@ class PlutoFeatureBuilder(AbstractFeatureBuilder):
             + [SemanticMapLayer.CROSSWALK]
             * len(map_objects[SemanticMapLayer.CROSSWALK])
         )
-
+        # the number of the objects is M (changeable), sample points usually 20 (fixed)
         M, P = len(lane_objects) + len(crosswalk_objects), sample_points
         point_position = np.zeros((M, 3, P, 2), dtype=np.float64)
         point_vector = np.zeros((M, 3, P, 2), dtype=np.float64)
@@ -588,13 +590,15 @@ class PlutoFeatureBuilder(AbstractFeatureBuilder):
             object_id = int(lane.id)
             idx = object_ids.index(object_id)
             speed_limit = lane.speed_limit_mps
-
+            # for each lane, resample the center lane with predefined sample points (20)
             centerline = self._sample_discrete_path(
                 lane.baseline_path.discrete_path, sample_points + 1
             )
+            # sample for the left bound
             left_bound = self._sample_discrete_path(
                 lane.left_boundary.discrete_path, sample_points + 1
             )
+            # sample for the right bound
             right_bound = self._sample_discrete_path(
                 lane.right_boundary.discrete_path, sample_points + 1
             )

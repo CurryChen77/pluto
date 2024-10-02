@@ -21,6 +21,9 @@ from nuplan.planning.script.utils import (
 )
 from nuplan.planning.simulation.planner.abstract_planner import AbstractPlanner
 from omegaconf import DictConfig, OmegaConf
+import warnings
+# ignore the user warning
+warnings.filterwarnings('ignore', category=UserWarning)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
