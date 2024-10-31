@@ -112,7 +112,7 @@ Download and place the checkpoint in the `pluto/checkpoints` folder.
 Run simulation for a random scenario in the nuPlan-mini split
 
 ```
-sh ./script/run_pluto_planner.sh pluto_planner nuplan_mini mini_demo_scenario pluto_1M_aux_cil.ckpt /dir_to_save_the_simulation_result_video
+sh ./script/run_pluto_planner.sh pluto_planner nuplan_mini mini_demo_scenario pluto_1M_aux_cil.ckpt /videos
 ```
 
 The rendered simulation video will be saved to the specified directory (need change `/dir_to_save_the_simulation_result_video`).
